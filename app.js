@@ -37,6 +37,11 @@ app.use("/usuarios", usuariosRoutes);
 
 app.get("/", (req, res) => {
     res.render("inicio", { usuario: req.session ? req.session.nombre : null });
+const usuariosRoutes = require("./routes/usuarios.routes");
+app.use("/usuarios", usuariosRoutes);
+
+app.get("/", (req, res) => {
+    res.render("inicio", { usuario: req.session.nombre });
 });
 
 const PORT = process.env.PORT || 3000;
