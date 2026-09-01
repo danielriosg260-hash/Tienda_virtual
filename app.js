@@ -1,6 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const conectarDB = require("./config/database");
+const productosRoutes = require("./routes/productos.routes");
 
 dotenv.config();
 
@@ -14,8 +15,10 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
 
+app.use("/productos", productosRoutes);
+
 app.get("/", (req, res) => {
-    res.send("Tienda virtual funcionando");
+    res.redirect("/productos");
 });
 
 const PORT = process.env.PORT || 3000;
