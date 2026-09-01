@@ -6,6 +6,10 @@ const conectarDB = require("./config/database");
 
 dotenv.config();
 
+if (!process.env.SESSION_SECRET) {
+    throw new Error("La variable SESSION_SECRET es obligatoria");
+}
+
 const app = express();
 
 conectarDB();
@@ -28,7 +32,7 @@ const usuariosRoutes = require("./routes/usuarios.routes");
 app.use("/usuarios", usuariosRoutes);
 
 app.get("/", (req, res) => {
-    res.send("Tienda virtual funcionando");
+    res.render("inicio", { usuario: req.session.nombre });
 });
 
 const PORT = process.env.PORT || 3000;
