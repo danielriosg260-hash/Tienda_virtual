@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Productos</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Tienda Virtual</h1>
+        <a class="btn" href="/productos/nuevo">Nuevo producto</a>
+    </header>
+
+    <main>
+        <% if (productos.length === 0) { %>
+            <p>No hay productos todavía. Crea el primero.</p>
+        <% } else { %>
+            <ul class="productos">
+                <% productos.forEach(p => { %>
+                    <li>
+                        <h3><%= p.nombre %></h3>
+                        <p><%= p.descripcion %></p>
+                        <p class="precio">S/ <%= p.precio %></p>
+                        <% if (p.imagen) { %>
+                            <img src="<%= p.imagen %>" alt="<%= p.nombre %>">
+                        <% } %>
+                        <div class="acciones">
+                            <a class="btn" href="/productos/<%= p._id %>/editar">Editar</a>
+                            <a class="btn btn-peligro" href="/productos/<%= p._id %>/eliminar"
+                               onclick="return confirm('¿Eliminar este producto?')">Eliminar</a>
+                        </div>
+                    </li>
+                <% }) %>
+            </ul>
+        <% } %>
+    </main>
+</body>
+</html>
